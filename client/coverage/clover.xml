@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< Updated upstream
+<coverage generated="1709739606812" clover="3.2.0">
+  <project timestamp="1709739606813" name="All files">
+=======
+<coverage generated="1709816945411" clover="3.2.0">
+  <project timestamp="1709816945412" name="All files">
+>>>>>>> Stashed changes
+    <metrics statements="69" coveredstatements="69" conditionals="15" coveredconditionals="10" methods="16" coveredmethods="16" elements="100" coveredelements="95" complexity="0" loc="69" ncloc="69" packages="5" files="10" classes="10"/>
+    <package name="Button">
+      <metrics statements="10" coveredstatements="10" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+      <file name="index.tsx" path="C:\Users\Admin\Desktop\bigProject-react-ts\client\src\components\common\Button\index.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+<<<<<<< Updated upstream
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+=======
+        <line num="30" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+>>>>>>> Stashed changes
+      </file>
+      <file name="style.ts" path="C:\Users\Admin\Desktop\bigProject-react-ts\client\src\components\common\Button\style.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="Card">
+      <metrics statements="24" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
+      <file name="index.tsx" path="C:\Users\Admin\Desktop\bigProject-react-ts\client\src\components\common\Card\index.tsx">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="44" count="3" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+      </file>
+      <file name="style.ts" path="C:\Users\Admin\Desktop\bigProject-react-ts\client\src\components\common\Card\style.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="53" count="5" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="Input">
+      <metrics statements="15" coveredstatements="15" conditionals="8" coveredconditionals="4" methods="2" coveredmethods="2"/>
+      <file name="index.tsx" path="C:\Users\Admin\Desktop\bigProject-react-ts\client\src\components\common\Input\index.tsx">
+        <metrics statements="11" coveredstatements="11" conditionals="8" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+      </file>
+      <file name="style.ts" path="C:\Users\Admin\Desktop\bigProject-react-ts\client\src\components\common\Input\style.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="Tag">
+      <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+      <file name="index.tsx" path="C:\Users\Admin\Desktop\bigProject-react-ts\client\src\components\common\Tag\index.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+      </file>
+      <file name="style.ts" path="C:\Users\Admin\Desktop\bigProject-react-ts\client\src\components\common\Tag\style.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="TickList">
+      <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="index.tsx" path="C:\Users\Admin\Desktop\bigProject-react-ts\client\src\components\common\TickList\index.tsx">
+        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+<<<<<<< Updated upstream
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+=======
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+>>>>>>> Stashed changes
+      </file>
+      <file name="style.ts" path="C:\Users\Admin\Desktop\bigProject-react-ts\client\src\components\common\TickList\style.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+<<<<<<< Updated upstream
+        <line num="6" count="5" type="stmt"/>
+=======
+        <line num="6" count="6" type="stmt"/>
+>>>>>>> Stashed changes
+        <line num="13" count="2" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

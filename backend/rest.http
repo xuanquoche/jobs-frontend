@@ -1,0 +1,10 @@
+POST  http://localhost:1337/api/customers
+Content-Type: application/json
+
+{
+  "data": {
+    "email": "quocntx@gmail.com",
+    "password": "xuanquoc",
+    "name": "quoc"
+  }
+}

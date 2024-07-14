@@ -1,0 +1,36 @@
+
+.wrapp{
+    min-width: 370px;
+    height: 100vh;
+}
+
+.content{
+    max-width: 370px;
+    margin: auto;
+}
+
+.sidebar{
+    background-color: #F4F4F4;
+}
+
+.recapcha{
+    color: #9A9FA5;
+}
+
+@media screen and (min-width: 1024px) {
+    .sidebar{
+        width: 40%;
+    }
+    .content{
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 1240px) {
+    .sidebar{
+        width: 30%;
+    }
+    .content{
+        width: 70%;
+    }
+}
