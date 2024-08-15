@@ -1,10 +1,16 @@
-import * as React from "react";
-import SignbarHome from "../../components/modules/sidebarHome";
+/* eslint-disable react/react-in-jsx-scope */
+import Card from "../../components/common/Card";
+import { Header } from "../../components/modules/Header";
 
-export interface IAppProps {}
-
-export function HomePage(props: IAppProps) {
-  return <div className="container">Home</div>;
+export function HomePage() {
+  return (
+    <div className="containerParent">
+      <Header />
+      <div className="body-page">
+        <Card />
+      </div>
+    </div>
+  );
 }
 
 export default HomePage;

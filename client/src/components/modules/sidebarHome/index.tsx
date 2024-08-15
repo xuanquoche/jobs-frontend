@@ -1,15 +1,17 @@
+/* eslint-disable react/react-in-jsx-scope */
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined";
 import NewReleasesOutlinedIcon from "@mui/icons-material/NewReleasesOutlined";
+
+import { SidebarWrapper, SidebarText } from "./style";
 import logo from "../../../assets/icon/Logo.png";
 // React
 import { useNavigate } from "react-router-dom";
@@ -74,7 +76,7 @@ export default function SidebarHome() {
   };
 
   return (
-    <div>
+    <SidebarWrapper>
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
@@ -84,12 +86,12 @@ export default function SidebarHome() {
             <ListItem key={item.id} disablePadding>
               <ListItemButton onClick={() => handleNavigate(item.path)}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText className="sidebarText" primary={item.name} />
+                <SidebarText className="sidebarText" primary={item.name} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Box>
-    </div>
+    </SidebarWrapper>
   );
 }

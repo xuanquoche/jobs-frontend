@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./App.css";
 import { privateRoutes, publicRoutes } from "./routes";
 import { ThemeProvider } from "@mui/material";
 import theme from "./assets/themes/colors";
-import SidebarHome from "./components/modules/sidebarHome";
+import { DefaultSidebar } from "./components/modules/DefaultLayout/DefaultSidebar";
+import React from "react";
+
 function isUserLoggedIn() {
   const token = localStorage.getItem("token");
   console.log("hello", token);
@@ -33,24 +35,24 @@ function App() {
               element={<route.component />}
             />
           ))}
-          {privateRoutes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              element={
-                isLoggedIn ? (
-                  <div className="flex flex-row">
-                    <div className="sidebar">
-                      <SidebarHome />
-                    </div>
-                    <route.component />
-                  </div>
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-          ))}
+          {privateRoutes.map((route, index) => {
+            const Layout = route.isShowSidebar ? DefaultSidebar : Fragment;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  isLoggedIn ? (
+                    <Layout>
+                      <route.component />
+                    </Layout>
+                  ) : (
+                    <Navigate to="/" />
+                  )
+                }
+              />
+            );
+          })}
         </Routes>
       </div>
     </ThemeProvider>

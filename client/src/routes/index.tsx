@@ -10,7 +10,7 @@ export const publicRoutes = [
 ];
 
 export const privateRoutes = [
-  { path: "/home", component: HomePage },
-  { path: "/shop", component: Shop },
-  { path: "/product", component: Product },
+  { path: "/home", component: HomePage, isShowSidebar: true },
+  { path: "/shop", component: Shop, isShowSidebar: true },
+  { path: "/product", component: Product, isShowSidebar: true },
 ];

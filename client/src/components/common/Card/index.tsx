@@ -1,72 +1,68 @@
+/* eslint-disable react/display-name */
 import React, { memo } from "react";
-import CardMui from "./style";
 import {
-  TyographyCustom,
-  CardContentCustome,
-  CardActionsCustome,
-  IconButtonCustom,
-  DivCustom,
+  CardMui,
+  CardHeaderCustom,
+  AvatarCustom,
+  CardContentCustom,
+  CardActionsCustom,
 } from "./style";
-import { CardMedia } from "@mui/material";
-import Tick from "../TickList";
-import star from "../../../assets/icon/star.png";
-import Edit from "../../../assets/icon/Edit.png";
-import Delete from "../../../assets/icon/del.png";
-import RightIcon from "../../../assets/icon/detail.png";
+import Button from "../Button";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import Tag from "../Tag";
 
 interface CardProps {
-  image: string;
-  title: string;
+  image?: string;
+  companyName?: string;
   className?: string;
-  rating?: number;
-  price?: number;
+  jobName?: string;
+  description?: string;
+  salary?: number;
+  location?: string;
+  status?: string;
+  type?: string;
+  endDate?: Date;
+  startDate?: Date;
   onClick?: () => void;
 }
 
-export const Card: React.FC<CardProps> = memo(
-  ({ image, title, className, rating, price, onClick }) => {
-    const iconHoverArr = [
-      { id: 1, icon: Edit },
-      { id: 2, icon: Delete },
-      { id: 3, icon: RightIcon },
-    ];
+const Card: React.FC<CardProps> = memo(
+  // eslint-disable-next-line react/prop-types
+  ({
+    image,
+    companyName,
+    className,
+    jobName,
+    description,
+    salary,
+    location,
+    status,
+    type,
+    endDate,
+    startDate,
+    onClick,
+  }) => {
     return (
       <CardMui className={`card ${className}`}>
-        <DivCustom className="wrap-img-overlay">
-          <CardMedia
-            component="img"
-            height="194"
-            image={image}
-            alt="Paella dish"
-            className="static"
-            data-testid="card"
-          />
-          <DivCustom className="overlay absolute">
-            {iconHoverArr.map((icon, index) => (
-              <DivCustom  className="action-icon"  key={index}>
-                <Tick clasname={`icon-action tick-${icon.id} `} icon={icon.icon}  onClick={onClick} />
-              </DivCustom>
-            ))}
-          </DivCustom>
-        </DivCustom>
-        <CardContentCustome className="content-product flex justify-between">
-          <div className="description flex flex-col">
-            <TyographyCustom className="product-name text-left">
-              {title}
-            </TyographyCustom>
-            <CardActionsCustome disableSpacing>
-              <IconButtonCustom aria-label="add to rating" className="p-none">
-                <div className="rating flex">
-                  <div className="rating-icon self-center mr-2">
-                    <img src={star} alt="star" />
-                  </div>
-                  <p className="rating-number">{rating}</p>
-                </div>
-              </IconButtonCustom>
-            </CardActionsCustome>
+        <CardHeaderCustom
+          avatar={<AvatarCustom>R</AvatarCustom>}
+          action={<Button icon={<ArrowOutwardIcon />} />}
+          title={"Helo"}
+        />
+        <CardContentCustom>
+          <div className="jobName">
+            <h2>Senior Product Designer</h2>
           </div>
-          <TyographyCustom className="price">${price}</TyographyCustom>
-        </CardContentCustome>
+          <div className="jobDescription">
+            Looking for an experienced Web Designer for an our company.
+          </div>
+        </CardContentCustom>
+        <CardActionsCustom>
+          <Tag text="WFH" />
+          <Tag text="WFH" />
+          <Tag text="WFH" />
+          <Tag text="WFH" />
+        </CardActionsCustom>
       </CardMui>
     );
   }
