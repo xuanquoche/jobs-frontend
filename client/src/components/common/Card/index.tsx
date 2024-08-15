@@ -7,7 +7,7 @@ import {
   CardContentCustom,
   CardActionsCustom,
 } from "./style";
-import Button from "../Button";
+import IconButtonMui from "../ButtonIcon/style";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import Tag from "../Tag";
 
@@ -45,8 +45,12 @@ const Card: React.FC<CardProps> = memo(
     return (
       <CardMui className={`card ${className}`}>
         <CardHeaderCustom
-          avatar={<AvatarCustom>R</AvatarCustom>}
-          action={<Button icon={<ArrowOutwardIcon />} />}
+          avatar={<AvatarCustom sx={{ width: 56, height: 56 }}>R</AvatarCustom>}
+          action={
+            <IconButtonMui color="primary" className="iconButtonDetail">
+              <ArrowOutwardIcon />
+            </IconButtonMui>
+          }
           title={"Helo"}
         />
         <CardContentCustom>
@@ -58,7 +62,7 @@ const Card: React.FC<CardProps> = memo(
           </div>
         </CardContentCustom>
         <CardActionsCustom>
-          <Tag text="WFH" />
+          <Tag text="WFH" variant="contained" />
           <Tag text="WFH" />
           <Tag text="WFH" />
           <Tag text="WFH" />

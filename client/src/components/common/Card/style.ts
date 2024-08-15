@@ -16,12 +16,18 @@ export const CardHeaderCustom = styled(CardHeader)(({}) => ({
     fontSize: "1.5rem",
     fontWeight: "700",
   },
+  ".iconButtonDetail": {
+    backgroundColor: "#cfe2ff",
+    borderColer: "#3b82f6",
+  },
 }));
 
 export const AvatarCustom = styled(Avatar)(({}) => ({
   "@media (max-width: 375px)": {
     display: "none",
   },
+  borderColor: "black",
+  padding: "10px",
 }));
 
 export const CardContentCustom = styled(CardContent)(({}) => ({
