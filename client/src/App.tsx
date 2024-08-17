@@ -6,22 +6,33 @@ import { privateRoutes, publicRoutes } from "./routes";
 import { ThemeProvider } from "@mui/material";
 import theme from "./assets/themes/colors";
 import { DefaultSidebar } from "./components/modules/DefaultLayout/DefaultSidebar";
-import React from "react";
+import setupAxiosInterceptors from "./utils/setupAxiosInterceptors";
+import { getAccessToken } from "./utils/tokenStorage";
 
-function isUserLoggedIn() {
-  const token = localStorage.getItem("token");
-  console.log("hello", token);
-  return !!token;
-}
+setupAxiosInterceptors();
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(isUserLoggedIn());
+  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
 
   useEffect(() => {
-    window.addEventListener("storage", () => {
-      setIsLoggedIn(isUserLoggedIn());
-    });
-  }, [isUserLoggedIn]);
+    const checkToken = () => {
+      const token = getAccessToken();
+      if (token) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkToken();
+
+    // Listen for changes in localStorage
+    window.addEventListener("storage", checkToken);
+
+    return () => {
+      window.removeEventListener("storage", checkToken);
+    };
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

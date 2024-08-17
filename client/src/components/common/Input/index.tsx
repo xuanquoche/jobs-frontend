@@ -7,8 +7,7 @@ import accessIcon from "../../../assets/icon/success.png";
 import InputStyle from "./style.ts";
 import KeyIcon from "@mui/icons-material/Key";
 
-interface InputPropsCus
-  extends InputProps {
+interface InputPropsCus extends InputProps {
   label?: string;
   className?: string;
   icon?: string;
@@ -57,11 +56,11 @@ export const Input: React.FC<InputPropsCus> = memo(
                   </div>
                 ) : type === "text" ? (
                   <div></div>
-                ): isError ? (
+                ) : isError ? (
                   <div className="mail-icon flex justify-center items-center pr-2 ml-2">
                     <img src={unionIcon} alt="mail" />
                   </div>
-                ): (
+                ) : (
                   <div></div>
                 )}
               </InputAdornment>
@@ -96,6 +95,5 @@ Input.defaultProps = {
   isTrue: false,
   isError: false,
 };
-
 
 export default Input;

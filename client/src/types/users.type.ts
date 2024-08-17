@@ -1,18 +1,23 @@
 export interface User {
-    username?: string,
-    email: string,
-    password: string,
-    avatar?: string,
-  }
-  
-export interface UserLoginform {
-  identifier: string;
+  fullname?: string;
+  email: string;
   password: string;
-  jwt?: string;
+  avatar?: string;
+  confirmPassword?: string;
+  role: number;
 }
-  export interface FormErrors {
-    username?: string;
-    email?: string;
-    password?: string;
-  }
-  
+
+export interface UserLoginform {
+  email: string;
+  password: string;
+  data?: {
+    access_token: string;
+    refresh_token: string;
+  };
+}
+export interface FormErrors {
+  fullname?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+}

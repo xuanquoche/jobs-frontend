@@ -9,10 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { FormErrors, UserLoginform } from "../../types/users.type";
 import { useMutation } from "@tanstack/react-query";
 import { validateFormLogin } from "../../utils/AuthenValidate";
-import { loginUser } from "../../api/fetchUser";
-import React from "react";
+import { loginUser } from "../../api/loginApi";
+import { setTokens } from "../../utils/tokenStorage";
+import axios from "axios";
+
 const initialUser: UserLoginform = {
-  identifier: "",
+  email: "",
   password: "",
 };
 const Login = () => {
@@ -42,19 +44,21 @@ const Login = () => {
       return loginUser(user);
     },
     onSuccess: (data) => {
-      window.localStorage.setItem("token", data.jwt || "");
-      console.log("jwt", data);
-      window.dispatchEvent(new Event("storage"));
-
+      setTokens(
+        data.data?.access_token as string,
+        data.data?.refresh_token as string
+      );
+      // axios.defaults.headers.common["Authorization"] =
+      //   `Bearer ${data.data?.access_token}`;
       navigate("/home");
-
-      // localStorage.clear();
+      window.dispatchEvent(new Event("storage"));
     },
   });
 
   const handleSignIn = async () => {
     try {
-      if (user.identifier && user.password) {
+      if (user.email && user.password) {
+        console.log("user", user);
         mutate(user);
       }
     } catch (error) {
@@ -99,9 +103,9 @@ const Login = () => {
             isTrue={!formErrors.email}
             isError={!!formErrors.email}
             formError={formErrors.email}
-            name="identifier"
+            name="email"
             onChange={handleChange}
-            value={user.identifier}
+            value={user.email}
             type="email"
             className="w-100"
             placeholder="Your email"

@@ -1,4 +1,4 @@
-import { User, UserLoginform } from "../types/users.type";
+import { User } from "../types/users.type";
 import http from "../utils/http";
 
 export const fetchUser = async () => {
@@ -10,19 +10,3 @@ export const fetchUser = async () => {
     throw error;
   }
 };
-
-export const loginUser = async (user: UserLoginform) => {
-  const userLogin = {
-    identifier: user.identifier,
-    password: user.password,
-  }
-    try {
-      
-      const response = await http.post<UserLoginform>("/api/auth/local/", userLogin);
-      console.log("hi",response.data)
-      return response.data;
-    } catch (error) {
-      console.log("sign in fail", error);
-      throw error;
-    }
-  };

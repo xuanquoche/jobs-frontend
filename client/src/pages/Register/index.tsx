@@ -11,13 +11,33 @@ import { FormErrors, User } from "../../types/users.type";
 import { registerUser } from "../../api/registerApi";
 import { useMutation } from "@tanstack/react-query";
 import { validateAuthen } from "../../utils/AuthenValidate";
-import "./register.css"
+import "./register.css";
+import Select, { OptionsProps } from "../../components/common/Select";
+import { Role } from "../../constant/enum";
 
 const initialUser: User = {
-  username: "",
+  fullname: "",
   email: "",
   password: "",
+  confirmPassword: "",
+  role: 0,
 };
+
+const services = [
+  {
+    icon: google,
+    text: "Google",
+  },
+  {
+    icon: apple,
+    text: "Apple ID",
+  },
+];
+
+const OptionRole: OptionsProps[] = [
+  { keyvalue: 0, textValue: Role.USER },
+  { keyvalue: 1, textValue: Role.CREATOR },
+];
 const Register = () => {
   const [user, setUser] = useState(initialUser);
   const [formErrors, setFormErrors] = useState<FormErrors>({});
@@ -41,20 +61,27 @@ const Register = () => {
     }));
   };
 
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+
+    setUser((prevUser: User) => ({
+      ...prevUser,
+      role: Number(value),
+    }));
+
+    const updatedUser = { ...user, role: Number(value) };
+    const errors = validateAuthen(updatedUser);
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      role: errors.role,
+    }));
+  };
+
   const { mutate } = useMutation({
     mutationFn: (user: User) => {
       return registerUser(user);
     },
   });
-
-  useEffect(() => {
-    const isFormValid = Object.values(formErrors).every((error) => !error);
-    const isUserNotEmpty = Object.values(user).every(
-      (value) => value.trim() !== ""
-    );
-    console.log(isUserNotEmpty);
-    setisDisable(!isFormValid || !isUserNotEmpty);
-  }, [formErrors, user]);
 
   const handleSignup = async () => {
     try {
@@ -65,16 +92,18 @@ const Register = () => {
     }
   };
 
-  const services = [
-    {
-      icon: google,
-      text: "Google",
-    },
-    {
-      icon: apple,
-      text: "Apple ID",
-    },
-  ];
+  useEffect(() => {
+    const isFormValid = Object.values(formErrors).every((error) => !error);
+    const isUserNotEmpty = Object.values(user).every((value) => {
+      if (typeof value === "string") {
+        return value.trim() !== "";
+      } else if (typeof value === "number") {
+        return value >= 0;
+      }
+      return false;
+    });
+    setisDisable(!isFormValid || !isUserNotEmpty);
+  }, [formErrors, user]);
 
   return (
     <div className="wrapp flex flex-row">
@@ -90,7 +119,12 @@ const Register = () => {
 
         <div className="social flex gap-4 flex-row">
           {services.map((service, index) => (
-            <Tag key={index} icon={service.icon} text={service.text} />
+            <Tag
+              key={index}
+              icon={service.icon}
+              text={service.text}
+              color="primary"
+            />
           ))}
         </div>
 
@@ -102,12 +136,12 @@ const Register = () => {
 
         <form action="" className="form-signup flex gap-4 flex-col">
           <Input
-            isTrue={!formErrors.username}
-            isError={!!formErrors.username}
-            formError={formErrors.username}
-            name="username"
+            isTrue={!formErrors.fullname}
+            isError={!!formErrors.fullname}
+            formError={formErrors.fullname}
+            name="fullname"
             onChange={handleChange}
-            value={user.username}
+            value={user.fullname}
             type="text"
             className="w-100"
             placeholder="Your Name"
@@ -134,6 +168,18 @@ const Register = () => {
             className="w-100"
             placeholder="Password"
           />
+          <Input
+            isTrue={!formErrors.confirmPassword}
+            isError={!!formErrors.confirmPassword}
+            formError={formErrors.confirmPassword}
+            name="confirmPassword"
+            onChange={handleChange}
+            value={user.confirmPassword}
+            type="password"
+            className="w-100"
+            placeholder="Confirm Password"
+          />
+          <Select options={OptionRole} onChange={handleSelectChange} />
           <Button
             className="w-100"
             variant={"contained"}
