@@ -11,7 +11,6 @@ import { useMutation } from "@tanstack/react-query";
 import { validateFormLogin } from "../../utils/AuthenValidate";
 import { loginUser } from "../../api/loginApi";
 import { setTokens } from "../../utils/tokenStorage";
-import axios from "axios";
 
 const initialUser: UserLoginform = {
   email: "",

@@ -8,6 +8,7 @@ import theme from "./assets/themes/colors";
 import { DefaultSidebar } from "./components/modules/DefaultLayout/DefaultSidebar";
 import setupAxiosInterceptors from "./utils/setupAxiosInterceptors";
 import { getAccessToken } from "./utils/tokenStorage";
+import { VerifiedToken } from "./api/verifiedToken";
 
 setupAxiosInterceptors();
 
@@ -19,6 +20,7 @@ function App() {
       const token = getAccessToken();
       if (token) {
         setIsLoggedIn(true);
+        verifiedToken();
       } else {
         setIsLoggedIn(false);
       }
@@ -33,6 +35,11 @@ function App() {
       window.removeEventListener("storage", checkToken);
     };
   }, []);
+
+  const verifiedToken = async () => {
+    const resulst = await VerifiedToken();
+    console.log("result tokken", resulst);
+  };
 
   return (
     <ThemeProvider theme={theme}>
