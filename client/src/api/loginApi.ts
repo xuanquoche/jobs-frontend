@@ -8,7 +8,6 @@ export const loginUser = async (user: UserLoginform) => {
   };
   try {
     const response = await http.post<UserLoginform>("/users/login", userLogin);
-    console.log("hi", response.data);
     return response.data;
   } catch (error) {
     console.log("sign in fail", error);

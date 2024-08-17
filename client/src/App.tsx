@@ -7,40 +7,15 @@ import { ThemeProvider } from "@mui/material";
 import theme from "./assets/themes/colors";
 import { DefaultSidebar } from "./components/modules/DefaultLayout/DefaultSidebar";
 import setupAxiosInterceptors from "./utils/setupAxiosInterceptors";
-import { getAccessToken } from "./utils/tokenStorage";
-import { VerifiedToken } from "./api/verifiedToken";
+import { useCheckAuthentication } from "./hook/useCheckAuthentication";
 
 setupAxiosInterceptors();
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
-
+  const checkIslogin = useCheckAuthentication();
   useEffect(() => {
-    const checkToken = () => {
-      const token = getAccessToken();
-      if (token) {
-        setIsLoggedIn(true);
-        verifiedToken();
-      } else {
-        setIsLoggedIn(false);
-      }
-    };
-
-    checkToken();
-
-    // Listen for changes in localStorage
-    window.addEventListener("storage", checkToken);
-
-    return () => {
-      window.removeEventListener("storage", checkToken);
-    };
-  }, []);
-
-  const verifiedToken = async () => {
-    const resulst = await VerifiedToken();
-    console.log("result tokken", resulst);
-  };
-
+    console.log("check", checkIslogin);
+  }, [checkIslogin]);
   return (
     <ThemeProvider theme={theme}>
       <div className="md:container mx-auto">
@@ -60,12 +35,12 @@ function App() {
                 key={index}
                 path={route.path}
                 element={
-                  isLoggedIn ? (
+                  checkIslogin ? (
                     <Layout>
                       <route.component />
                     </Layout>
                   ) : (
-                    <Navigate to="/" />
+                    <Navigate to={"/"} />
                   )
                 }
               />
