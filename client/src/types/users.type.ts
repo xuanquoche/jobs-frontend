@@ -21,3 +21,14 @@ export interface FormErrors {
   password?: string;
   confirmPassword?: string;
 }
+
+export interface Creator {
+  skill?: string;
+  level?: string;
+  fullname?: string;
+  email?: string;
+  location?: string;
+  avatar?: string;
+  decription?: string;
+  phone?: string;
+}

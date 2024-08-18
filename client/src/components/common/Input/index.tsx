@@ -16,6 +16,7 @@ interface InputPropsCus extends InputProps {
   isError?: boolean;
   isTrue?: boolean;
   formError?: string;
+  position?: boolean;
 }
 
 export const Input: React.FC<InputPropsCus> = memo(
@@ -29,13 +30,21 @@ export const Input: React.FC<InputPropsCus> = memo(
     type,
     icon,
     formError,
+    position,
     ...rest
   }) => {
     const { color, ...inputProps } = rest;
 
     return (
-      <>
-        {label && <label htmlFor="input">{label}</label>}
+      <div className={`${position ? "flex" : ""}`}>
+        {label && (
+          <label
+            htmlFor="input"
+            className="min-w-20 flex justify-start items-center"
+          >
+            {label}
+          </label>
+        )}
 
         <div className="input-group flex flex-col rounded-xl flex-1">
           <InputStyle
@@ -83,7 +92,7 @@ export const Input: React.FC<InputPropsCus> = memo(
           />
           <p className="form-error text-red-500 text-start">{formError}</p>
         </div>
-      </>
+      </div>
     );
   }
 );
