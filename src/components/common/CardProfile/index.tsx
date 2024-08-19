@@ -4,32 +4,30 @@ import DefaultUserAvatar from "../../../assets/images/avatar-default-svgrepo-com
 import { Creator } from "../../../types/users.type";
 import Input from "../Input";
 import Button from "../Button";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
+import { updateCreator } from "../../../api/creator/updateCreator";
 
-interface UserProfle extends Creator {
-  onUpdate?: () => void;
-}
+interface UserProfle extends Creator {}
 
 export const CardProfile = ({
   fullname,
   avatar,
   email,
   level,
-  location,
+  address,
   skill,
   phone,
-  decription,
-  onUpdate,
+  description,
 }: UserProfle) => {
   const initialUser: Creator = {
-    skill: skill,
-    level: level,
-    fullname: fullname,
-    email: email,
-    location: location,
-    avatar: avatar,
-    decription: decription,
-    phone: phone,
+    skill: skill || "",
+    level: level || "",
+    fullname: fullname || "",
+    email: email || "",
+    address: address || "",
+    avatar: avatar || "",
+    description: description || "",
+    phone: phone || "",
   };
   const [isUpdate, setIsUpdate] = useState<Boolean>(false);
   const [user, setUser] = useState<Creator>(initialUser);
@@ -47,6 +45,17 @@ export const CardProfile = ({
     }));
   };
 
+  const handleUpdate = async () => {
+    try {
+      if (user) {
+        const res = await updateCreator(user);
+        console.log("rsw", res);
+        return res;
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
   return (
     <Grid container spacing={2}>
       <Grid item xs={5}>
@@ -59,7 +68,7 @@ export const CardProfile = ({
                 style={{ width: "60%", height: "85%" }}
               />
             </div>
-            <div className="userName">{fullname || "User"}</div>
+            <div className="userName">{fullname}</div>
             <div className="actionEditButton">
               <Button
                 className="buttonEdit"
@@ -133,10 +142,10 @@ export const CardProfile = ({
                   required
                   style={{ margin: "5px 0" }}
                   position={true}
-                  value={user.location}
+                  value={user.address}
                   label="Location"
                   type="text"
-                  name="location"
+                  name="address"
                 />
               </div>
               <div className="skill">
@@ -164,7 +173,7 @@ export const CardProfile = ({
                       setIsUpdate(false);
                     }}
                   />
-                  <Button type="submit" text="Update" onClick={onUpdate} />
+                  <Button type="submit" text="Update" onClick={handleUpdate} />
                 </>
               ) : null}
             </div>

@@ -27,8 +27,8 @@ export interface Creator {
   level?: string;
   fullname?: string;
   email?: string;
-  location?: string;
+  address?: string;
   avatar?: string;
-  decription?: string;
+  description?: string;
   phone?: string;
 }

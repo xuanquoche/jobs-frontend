@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./App.css";
@@ -13,9 +13,7 @@ setupAxiosInterceptors();
 
 function App() {
   const checkIslogin = useCheckAuthentication();
-  useEffect(() => {
-    console.log("check", checkIslogin);
-  }, [checkIslogin]);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="md:container mx-auto">
