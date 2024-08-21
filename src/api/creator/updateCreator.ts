@@ -9,14 +9,13 @@ export const updateCreator = async (user: Creator) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${access_token}`,
     };
-    console.log(user);
     const response = await http.patch<Creator>("/users/me", user, {
       headers,
     });
     console.log("reso", response);
-    // return response.data;
-  } catch (error) {
-    console.log("update creator fail", error);
+    return response.data;
+  } catch (error: any) {
+    console.log("Chi tiết lỗi từ server:", error.response);
     throw error;
   }
 };

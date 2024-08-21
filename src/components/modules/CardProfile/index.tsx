@@ -2,10 +2,12 @@ import { Avatar, Grid } from "@mui/material";
 import { CardMuiProfile } from "./style";
 import DefaultUserAvatar from "../../../assets/images/avatar-default-svgrepo-com.svg";
 import { Creator } from "../../../types/users.type";
-import Input from "../Input";
-import Button from "../Button";
-import { ChangeEvent, useCallback, useState } from "react";
+import Input from "../../common/Input";
+import Button from "../../common/Button";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { updateCreator } from "../../../api/creator/updateCreator";
+import Select, { OptionsProps } from "../../common/Select";
+import Chip from "@mui/material/Chip";
 
 interface UserProfle extends Creator {}
 
@@ -15,12 +17,12 @@ export const CardProfile = ({
   email,
   level,
   address,
-  skill,
+  skills,
   phone,
   description,
 }: UserProfle) => {
   const initialUser: Creator = {
-    skill: skill || "",
+    skills: skills || [],
     level: level || "",
     fullname: fullname || "",
     email: email || "",
@@ -29,8 +31,11 @@ export const CardProfile = ({
     description: description || "",
     phone: phone || "",
   };
+
   const [isUpdate, setIsUpdate] = useState<Boolean>(false);
   const [user, setUser] = useState<Creator>(initialUser);
+  const [skillTag, setSkillTag] = useState<string[]>([]);
+  const [skillTagFirst, setSkillTagFirst] = useState<string[]>([]);
 
   const handleEditButton = useCallback(() => {
     setIsUpdate(true);
@@ -47,15 +52,69 @@ export const CardProfile = ({
 
   const handleUpdate = async () => {
     try {
-      if (user) {
-        const res = await updateCreator(user);
-        console.log("rsw", res);
-        return res;
-      }
+      const res = await updateCreator(user);
+      setIsUpdate(false);
+      return res;
     } catch (error) {
       throw error;
     }
   };
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    if (!skillTag.includes(value)) {
+      setSkillTag((prev) => [...prev, value]);
+      setUser((prevUser: Creator) => ({
+        ...prevUser,
+        skills: [...(prevUser.skills || []), value],
+      }));
+    }
+  };
+
+  const handleDelete = () => {
+    console.info("You clicked the delete icon.");
+  };
+
+  const SKILLS: OptionsProps[] = [
+    {
+      keyvalue: "React",
+      textValue: "React",
+    },
+    {
+      keyvalue: "Nodejs",
+      textValue: "Nodejs",
+    },
+    {
+      keyvalue: "Go",
+      textValue: "Go",
+    },
+    {
+      keyvalue: "SQL",
+      textValue: "SQL",
+    },
+    {
+      keyvalue: "Angular",
+      textValue: "Angular",
+    },
+    {
+      keyvalue: "PHP",
+      textValue: "PHP",
+    },
+    {
+      keyvalue: "NextJs",
+      textValue: "NextJs",
+    },
+  ];
+
+  useEffect(() => {
+    if (user.skills) {
+      const skillName: string[] = [];
+      user.skills.map((skill: any) => {
+        skillName.push(skill.name);
+      });
+      setSkillTagFirst(skillName);
+    }
+  }, []);
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={5}>
@@ -149,23 +208,26 @@ export const CardProfile = ({
                 />
               </div>
               <div className="skill">
-                <Input
-                  disabled={!isUpdate}
-                  onChange={handleChange}
-                  required
-                  style={{ margin: "5px 0" }}
-                  position={true}
-                  value={user.skill}
-                  label="Skill"
-                  type="text"
-                  name="skill"
-                />
+                <div className="tagAction">
+                  {skillTagFirst.map((skill) => (
+                    <div className="chipDetail">
+                      <Chip label={skill} onDelete={handleDelete} />
+                    </div>
+                  ))}
+                  {skillTag &&
+                    skillTag.map((_skill, index) => (
+                      <div className="chipDetail">
+                        <Chip label={_skill} onDelete={handleDelete} />
+                      </div>
+                    ))}
+                </div>
+                <Select options={SKILLS} onChange={handleSelectChange} />
               </div>
             </div>
 
             <div className="actionButton">
               {isUpdate ? (
-                <>
+                <div style={{ gap: "20px" }}>
                   <Button
                     text="Cancel"
                     variant="outlined"
@@ -174,7 +236,7 @@ export const CardProfile = ({
                     }}
                   />
                   <Button type="submit" text="Update" onClick={handleUpdate} />
-                </>
+                </div>
               ) : null}
             </div>
           </form>

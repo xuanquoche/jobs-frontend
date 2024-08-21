@@ -1,6 +1,6 @@
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import HomePage from "../pages/HomePage";
+import HomePage from "../pages/Creator/HomePage";
 import Shop from "../pages/Shop";
 import Product from "../pages/Product";
 import { CreatorProfile } from "../pages/Creator/Profile";

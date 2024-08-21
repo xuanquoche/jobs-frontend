@@ -32,5 +32,14 @@ export const CardMuiProfile = styled(Card)(({}) => ({
     flexDirection: "column",
     justifiedContent: "space-arround",
     padding: "50px 30px",
+    ".skill": {
+      display: "flex",
+      flexDirection: "column",
+      ".tagAction": {
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "10px",
+      },
+    },
   },
 }));

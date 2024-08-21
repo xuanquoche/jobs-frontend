@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import { CardProfile } from "../../../components/common/CardProfile";
+import { useEffect, useState } from "react";
+import { CardProfile } from "../../../components/modules/CardProfile";
 import { Wrapper } from "./style";
 import { Creator } from "../../../types/users.type";
 import { fetchCreator } from "../../../api/creator/fetchCreator";
@@ -25,7 +25,7 @@ export const CreatorProfile = () => {
             fullname={user.fullname}
             email={user.email}
             address={user.address}
-            skill={user.skill}
+            skills={user.skills}
             level={user.level}
             phone={user.phone}
             description={user.description}

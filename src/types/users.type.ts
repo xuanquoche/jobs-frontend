@@ -23,7 +23,7 @@ export interface FormErrors {
 }
 
 export interface Creator {
-  skill?: string;
+  skills?: string[];
   level?: string;
   fullname?: string;
   email?: string;

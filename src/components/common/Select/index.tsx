@@ -5,7 +5,7 @@ import React, { memo } from "react";
 import NativeSelect from "@mui/material/NativeSelect";
 
 export interface OptionsProps {
-  keyvalue: number;
+  keyvalue: number | string;
   textValue: string;
 }
 

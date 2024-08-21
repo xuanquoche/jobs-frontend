@@ -7,7 +7,7 @@ import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 
 export const CardMui = styled(Card)(({}) => ({
-  maxWidth: "30%",
+  maxWidth: "100%",
 }));
 
 export const CardHeaderCustom = styled(CardHeader)(({}) => ({
