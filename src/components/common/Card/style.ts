@@ -32,13 +32,18 @@ export const AvatarCustom = styled(Avatar)(({}) => ({
 
 export const CardContentCustom = styled(CardContent)(({}) => ({
   ".jobName": {
-    textAlign: "left",
     fontSize: "1.25rem",
     fontWeight: "700",
   },
   ".jobDescription": {
-    textAlign: "left",
     marginTop: "10px",
+    display: "-webkit-box",
+    WebkitBoxOrient: "vertical",
+    WebkitLineClamp: "1", // Số lượng dòng hiển thị
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    lineHeight: "1.5em", // Khoảng cách giữa các dòng
+    maxHeight: "4.5em", // Chiều cao tối đa (3 dòng x 1.5em)
   },
 }));
 export const CardActionsCustom = styled(CardActions)(({}) => ({}));

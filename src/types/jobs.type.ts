@@ -13,6 +13,7 @@ export interface JobReqBody {
   skills: string[];
   start_date: string;
   end_date: string;
+  _id?: string;
 }
 
 export { JobStatus, JobTypes, Levels };

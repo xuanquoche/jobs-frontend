@@ -14,7 +14,7 @@ export function HomePage() {
         <div className="jobList">
           <Grid container spacing={3}>
             <Grid item xs={4}>
-              <Card />
+              <Card status="helo" />
             </Grid>
             <Grid item xs={4}>
               <Card />

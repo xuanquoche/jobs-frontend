@@ -10,9 +10,16 @@ import Date from "../../../components/common/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
 import Chip from "@mui/material/Chip";
 import { postJob } from "../../../api/Client/postJob";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Grid } from "@mui/material";
+import Card from "../../../components/common/Card";
+import { fetchJob } from "../../../api/fetchJob";
+import Skeleton from "react-loading-skeleton";
+import { JobStatus } from "../../../constant/enum";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const initialJob: JobReqBody = {
   name: "",
@@ -20,7 +27,7 @@ const initialJob: JobReqBody = {
   salary: 0,
   quantity: 0,
   level: Levels.FRESHER,
-  status: 0,
+  status: JobStatus.INACTIVE,
   thumbnail: "",
   type: JobTypes.PARTTIME,
   description: "",
@@ -33,6 +40,8 @@ export const HomePageClient = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [job, setJob] = useState<JobReqBody>(initialJob);
   const [skillTag, setSkillTag] = useState<string[]>([]);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(6);
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -50,7 +59,6 @@ export const HomePageClient = () => {
       [name]: value,
     }));
   };
-
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
 
@@ -101,10 +109,10 @@ export const HomePageClient = () => {
     },
   });
 
-  const createJob = async () => {
-    const res = await postJob(job);
-    return res;
-  };
+  const { data, isLoading } = useQuery({
+    queryKey: ["jobs", page, limit],
+    queryFn: fetchJob,
+  });
 
   return (
     <div className="wrapHomePageClient">
@@ -236,7 +244,6 @@ export const HomePageClient = () => {
                 </label>
                 <Select
                   name="skills"
-                  // value={job.skills}
                   options={SKILLS}
                   onChange={handleSelectChange}
                 />
@@ -249,6 +256,42 @@ export const HomePageClient = () => {
           </div>
         </Modal>
         <ToastContainer />
+      </div>
+      <div className="contentJob" style={{ maxWidth: "90%", margin: "0 auto" }}>
+        {isLoading ? (
+          <Skeleton count={3} />
+        ) : (
+          <Grid container spacing={3}>
+            {data?.data.jobs.map((job: JobReqBody, index) => (
+              <Grid item xs={4}>
+                <Card
+                  key={index}
+                  skills={job.skills}
+                  status={job.status}
+                  jobName={job.name}
+                  description={job.description}
+                  salary={job.salary}
+                  type={job.type}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+        {data?.data.jobs.length == 0 ? (
+          ""
+        ) : (
+          <Stack
+            spacing={limit}
+            style={{ marginTop: "20px", textAlign: "center" }}
+          >
+            <Pagination
+              count={data?.data.total_page}
+              shape="rounded"
+              page={page}
+              onChange={(event, value) => setPage(value)}
+            />
+          </Stack>
+        )}
       </div>
     </div>
   );

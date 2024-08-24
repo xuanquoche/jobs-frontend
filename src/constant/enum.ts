@@ -14,8 +14,7 @@ export enum JobTypes {
   FULLTIME = "FULLTIME",
   PARTTIME = "PARTTIME",
 }
-
 export enum JobStatus {
-  Inactive,
-  Active,
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
 }

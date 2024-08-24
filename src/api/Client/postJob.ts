@@ -10,7 +10,7 @@ export const postJob = async (job: JobReqBody) => {
       Authorization: `Bearer ${access_token}`,
     };
     console.log("reso", job);
-    const response = await http.post<JobReqBody>("/jobs/create", job, {
+    const response = await http.post<JobReqBody>("/jobs/", job, {
       headers,
     });
     return response.data;

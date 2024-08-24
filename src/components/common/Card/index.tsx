@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import {
   CardMui,
   CardHeaderCustom,
@@ -10,6 +10,7 @@ import {
 import IconButtonMui from "../ButtonIcon/style";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import Tag from "../Tag";
+import { Chip } from "@mui/material";
 
 interface CardProps {
   image?: string;
@@ -20,9 +21,10 @@ interface CardProps {
   salary?: number;
   location?: string;
   status?: string;
-  type?: string;
+  type: string;
   endDate?: Date;
   startDate?: Date;
+  skills?: string[];
   onClick?: () => void;
 }
 
@@ -40,8 +42,24 @@ const Card: React.FC<CardProps> = memo(
     type,
     endDate,
     startDate,
+    skills,
     onClick,
   }) => {
+    const getColor = (type: string) => {
+      switch (type) {
+        case "PARTTIME":
+          return "success";
+        case "FULLTIME":
+          return "secondary";
+        default:
+          return "error"; // Fallback color
+      }
+    };
+
+    useEffect(() => {
+      console.log("SKILL", skills);
+    });
+
     return (
       <CardMui className={`card ${className}`}>
         <CardHeaderCustom
@@ -55,18 +73,28 @@ const Card: React.FC<CardProps> = memo(
         />
         <CardContentCustom>
           <div className="jobName">
-            <h2>Senior Product Designer</h2>
+            <h2>{jobName}</h2>
           </div>
-          <div className="jobDescription">
-            Looking for an experienced Web Designer for an our company.
+          <CardActionsCustom>
+            {skills?.map((skill, index) => (
+              <Tag key={index} text={skill.name} variant="contained" />
+            ))}
+          </CardActionsCustom>
+          <div className="jobDescription">{description}</div>
+          <div className="salryStatus flex justify-between">
+            <div className="salary text-left">
+              <span style={{ fontWeight: "800" }}>Salary: </span>
+              {salary}$/h
+            </div>
+            <Chip className="left-0" label={status} color="error" />
           </div>
+          <Tag
+            text={type}
+            variant="contained"
+            color={getColor(type)}
+            // disabled={true}
+          />
         </CardContentCustom>
-        <CardActionsCustom>
-          <Tag text="WFH" variant="contained" />
-          <Tag text="WFH" />
-          <Tag text="WFH" />
-          <Tag text="WFH" />
-        </CardActionsCustom>
       </CardMui>
     );
   }

@@ -2,7 +2,6 @@ import ButtonMaterialUI from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
 const ButtonTagMui = styled(ButtonMaterialUI)(({ theme }) => ({
-  width: "100%",
   display: "flex",
   fontSize: "16px",
   color: `${theme.palette.primary.dark}`,
