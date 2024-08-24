@@ -8,7 +8,7 @@ interface DefaultSidebarProps {
 
 export function DefaultSidebar({ children }: DefaultSidebarProps) {
   return (
-    <div className="defaultLayout flex ">
+    <div className="defaultLayout flex h-full">
       <SidebarWrapper className="sidebarHomew w-3/12">
         <SidebarHome />
       </SidebarWrapper>

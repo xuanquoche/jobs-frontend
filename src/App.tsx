@@ -16,7 +16,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="md:container mx-auto">
+      <div className="md:container mx-auto h-full">
         <ReactQueryDevtools initialIsOpen={false} />
         <Routes>
           {publicRoutes.map((route, index) => (
