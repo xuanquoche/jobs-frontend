@@ -68,13 +68,6 @@ const Register = () => {
       ...prevUser,
       role: Number(value),
     }));
-
-    const updatedUser = { ...user, role: Number(value) };
-    const errors = validateAuthen(updatedUser);
-    setFormErrors((prevErrors) => ({
-      ...prevErrors,
-      role: errors.role,
-    }));
   };
 
   const { mutate } = useMutation({

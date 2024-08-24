@@ -2,7 +2,7 @@
 /* eslint-disable import/named */
 /* eslint-disable react/prop-types */
 import React, { memo } from "react";
-import NativeSelect from "@mui/material/NativeSelect";
+import { SelectCustom } from "./style";
 
 export interface OptionsProps {
   keyvalue: number | string;
@@ -12,12 +12,19 @@ export interface OptionsProps {
 interface SelectProp extends React.HTMLAttributes<HTMLSelectElement> {
   options: OptionsProps[];
   className?: string;
+  name?: string;
+  value?: string | number;
 }
 
 export const Select: React.FC<SelectProp> = memo(
-  ({ className, options, onChange }) => {
+  ({ className, options, name, onChange }) => {
     return (
-      <NativeSelect defaultValue={30} className={className} onChange={onChange}>
+      <SelectCustom
+        name={name}
+        defaultValue={30}
+        className={className}
+        onChange={onChange}
+      >
         {options.map((option) => {
           return (
             <option key={option.keyvalue} value={option.keyvalue}>
@@ -25,7 +32,7 @@ export const Select: React.FC<SelectProp> = memo(
             </option>
           );
         })}
-      </NativeSelect>
+      </SelectCustom>
     );
   }
 );

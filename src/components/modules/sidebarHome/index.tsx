@@ -80,7 +80,7 @@ export default function SidebarHome() {
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
-      <Box sx={{ height: "100vh" }}>
+      <Box>
         <List>
           {sidebarList.map((item) => (
             <ListItem key={item.id} disablePadding>

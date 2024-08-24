@@ -40,7 +40,7 @@ export const Input: React.FC<InputPropsCus> = memo(
         {label && (
           <label
             htmlFor="input"
-            className="min-w-20 flex justify-start items-center"
+            className="min-w-20 flex justify-start items-center font-bold mr-1.5"
           >
             {label}
           </label>

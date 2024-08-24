@@ -6,8 +6,10 @@ import Input from "../../common/Input";
 import Button from "../../common/Button";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { updateCreator } from "../../../api/creator/updateCreator";
-import Select, { OptionsProps } from "../../common/Select";
+import Select from "../../common/Select";
 import Chip from "@mui/material/Chip";
+import { SKILLS } from "../../../constant/constant";
+import { Levels } from "../../../constant/enum";
 
 interface UserProfle extends Creator {}
 
@@ -73,37 +75,6 @@ export const CardProfile = ({
   const handleDelete = () => {
     console.info("You clicked the delete icon.");
   };
-
-  const SKILLS: OptionsProps[] = [
-    {
-      keyvalue: "React",
-      textValue: "React",
-    },
-    {
-      keyvalue: "Nodejs",
-      textValue: "Nodejs",
-    },
-    {
-      keyvalue: "Go",
-      textValue: "Go",
-    },
-    {
-      keyvalue: "SQL",
-      textValue: "SQL",
-    },
-    {
-      keyvalue: "Angular",
-      textValue: "Angular",
-    },
-    {
-      keyvalue: "PHP",
-      textValue: "PHP",
-    },
-    {
-      keyvalue: "NextJs",
-      textValue: "NextJs",
-    },
-  ];
 
   useEffect(() => {
     if (user.skills) {
