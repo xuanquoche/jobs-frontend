@@ -14,6 +14,10 @@ export interface JobReqBody {
   start_date: string;
   end_date: string;
   _id?: string;
+  user?: {
+    fullname?: string;
+    id?: string;
+  };
 }
 
 export { JobStatus, JobTypes, Levels };

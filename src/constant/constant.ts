@@ -1,5 +1,7 @@
+import dayjs from "dayjs";
 import { OptionsProps } from "../components/common/Select";
-import { Levels } from "./enum";
+import { JobReqBody } from "../types/jobs.type";
+import { JobStatus, JobTypes, Levels } from "./enum";
 
 export const SKILLS: OptionsProps[] = [
   {
@@ -58,3 +60,18 @@ export const LEVELS: OptionsProps[] = [
     textValue: Levels.SENIOR,
   },
 ];
+
+export const initialJob: JobReqBody = {
+  name: "",
+  location: "",
+  salary: 0,
+  quantity: 0,
+  level: Levels.FRESHER,
+  status: JobStatus.INACTIVE,
+  thumbnail: "",
+  type: JobTypes.PARTTIME,
+  description: "",
+  skills: [],
+  start_date: dayjs().toISOString(),
+  end_date: dayjs().toISOString(),
+};

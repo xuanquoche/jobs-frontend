@@ -26,6 +26,10 @@ const IconButtonMui = styled(IconButton)(({ theme }) => ({
   "&.disabled": {
     opacity: 0.5,
   },
+  ".error": {
+    border: "1px solid #c62828",
+    color: "red",
+  },
 }));
 
 export default IconButtonMui;

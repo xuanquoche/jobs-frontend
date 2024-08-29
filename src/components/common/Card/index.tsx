@@ -56,10 +56,6 @@ const Card: React.FC<CardProps> = memo(
       }
     };
 
-    useEffect(() => {
-      console.log("SKILL", skills);
-    });
-
     return (
       <CardMui className={`card ${className}`}>
         <CardHeaderCustom

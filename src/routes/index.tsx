@@ -5,6 +5,7 @@ import Shop from "../pages/Shop";
 import Product from "../pages/Product";
 import { CreatorProfile } from "../pages/Creator/Profile";
 import { HomePageClient } from "../pages/Client/HomePage";
+import { AdminJobManagement } from "../pages/Admin/HomePageJobManagement";
 
 export const publicRoutes = [
   { path: "/", component: Login },
@@ -17,4 +18,5 @@ export const privateRoutes = [
   { path: "/product", component: Product, isShowSidebar: true },
   { path: "/creator/profile", component: CreatorProfile, isShowSidebar: true },
   { path: "/client", component: HomePageClient, isShowSidebar: true },
+  { path: "/admin/", component: AdminJobManagement, isShowSidebar: true },
 ];

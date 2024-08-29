@@ -2,7 +2,11 @@ import { styled } from "@mui/material/styles";
 import theme from "../../../assets/themes/colors";
 
 export const SidebarWrapper = styled("div")({
-  backgroundColor: theme.palette.primary.contrastText,
+  position: "sticky",
+  top: "0",
+
+  backgroundColor: theme.palette.grey[500],
+  overflow: "auto",
   width: "20%",
   "@media (max-width: 375px)": {
     display: "none",
@@ -13,6 +17,9 @@ export const SidebarWrapper = styled("div")({
 });
 
 export const ContentWrapper = styled("div")({
+  flex: "1",
+  overflowY: "auto",
+  height: "100vh",
   width: "75%",
   "@media (max-width: 375px)": {
     width: "100% !important",

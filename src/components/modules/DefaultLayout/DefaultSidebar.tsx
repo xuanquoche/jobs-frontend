@@ -12,7 +12,7 @@ export function DefaultSidebar({ children }: DefaultSidebarProps) {
       <SidebarWrapper className="sidebarHomew w-3/12">
         <SidebarHome />
       </SidebarWrapper>
-      <ContentWrapper className="contentWrapper flex-1">
+      <ContentWrapper className="contentWrapper flex-1 ">
         {children}
       </ContentWrapper>
     </div>

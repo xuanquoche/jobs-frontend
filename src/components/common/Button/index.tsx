@@ -8,8 +8,16 @@ import ButtonMui from "./style";
 interface ButtonPropsCus extends ButtonProps {
   text?: string;
   icon?: ReactElement;
-  kind?: "primary" | "error";
+  kind?:
+    | "primary"
+    | "inherit"
+    | "secondary"
+    | "success"
+    | "error"
+    | "info"
+    | "warning";
   className?: string;
+  variant: "text" | "contained" | "outlined";
   onClick?: () => void;
 }
 
@@ -22,6 +30,7 @@ export const Button: React.FC<ButtonPropsCus> = memo(
         disabled={disabled}
         endIcon={icon}
         onClick={onClick}
+        variant={variant}
       >
         {text}
       </ButtonMui>

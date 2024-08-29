@@ -20,21 +20,8 @@ import Skeleton from "react-loading-skeleton";
 import { JobStatus } from "../../../constant/enum";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-
-const initialJob: JobReqBody = {
-  name: "",
-  location: "",
-  salary: 0,
-  quantity: 0,
-  level: Levels.FRESHER,
-  status: JobStatus.INACTIVE,
-  thumbnail: "",
-  type: JobTypes.PARTTIME,
-  description: "",
-  skills: [],
-  start_date: dayjs().toISOString(),
-  end_date: dayjs().toISOString(),
-};
+import { initialJob } from "../../../constant/constant";
+import NavBar from "../../../components/modules/Navbar";
 
 export const HomePageClient = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -105,26 +92,26 @@ export const HomePageClient = () => {
       handleCloseModal();
       setJob(initialJob);
       setSkillTag([]);
+      refetch();
       toast.success("Success Notification !");
     },
   });
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["jobs", page, limit],
     queryFn: fetchJob,
   });
 
+  useEffect(() => {
+    console.log(data?.data);
+  }, [data]);
   return (
-    <div className="wrapHomePageClient">
-      <div
-        className="actionCreate"
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          margin: "20px 20px 20px 0",
-        }}
-      >
-        <Button text="Create Job" onClick={handleOpenModal} />
+    <div className="wrapHomePageClient flex flex-col">
+      <div className="actionCreate">
+        <div className="navigation">
+          <NavBar />
+        </div>
+
         <Modal isOpen={isOpen} onClose={handleCloseModal}>
           <div className="modalContent">
             <div style={{ margin: "10px 0" }} className="jobName">
@@ -251,19 +238,33 @@ export const HomePageClient = () => {
             </div>
             <div className="actionBtnGroup flex justify-end gap-5 mt-10">
               <Button text="Cancel" variant="outlined" />
-              <Button text="Save" onClick={() => mutate(job)} />
+              <Button
+                variant="contained"
+                text="Save"
+                onClick={() => mutate(job)}
+              />
             </div>
           </div>
         </Modal>
         <ToastContainer />
       </div>
-      <div className="contentJob" style={{ maxWidth: "90%", margin: "0 auto" }}>
+      <div className="createBtn flex justify-end" style={{ margin: "15px" }}>
+        <Button
+          variant="contained"
+          text="Create Job"
+          onClick={handleOpenModal}
+        />
+      </div>
+      <div
+        className="contentJob"
+        style={{ maxWidth: "90%", margin: "0 auto 50px" }}
+      >
         {isLoading ? (
           <Skeleton count={3} />
         ) : (
           <Grid container spacing={3}>
             {data?.data.jobs.map((job: JobReqBody, index) => (
-              <Grid item xs={4}>
+              <Grid item xs={4} style={{ flexGrow: 1 }}>
                 <Card
                   key={index}
                   skills={job.skills}

@@ -6,7 +6,15 @@ import { ButtonProps } from "@mui/material";
 import IconButtonMui from "./style";
 
 interface ButtonPropsCus extends ButtonProps {
-  kind?: "primary" | "error";
+  kind?:
+    | "default"
+    | "inherit"
+    | "success"
+    | "primary"
+    | "secondary"
+    | "error"
+    | "info"
+    | "warning";
   className?: string;
   onClick?: () => void;
 }
