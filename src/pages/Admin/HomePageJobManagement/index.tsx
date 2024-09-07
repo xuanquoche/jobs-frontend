@@ -4,8 +4,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useEffect, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { fetchJob } from "../../../api/fetchJob";
 import Button from "../../../components/common/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -15,37 +15,46 @@ import { Tag } from "../../../components/common/Tag";
 import Skeleton from "react-loading-skeleton"; // Import Skeleton nếu bạn đang dùng
 import { JobReqBody, JobStatus } from "../../../types/jobs.type";
 import { updateJob as updateJobAPI } from "../../../api/Job/updateJob";
-import { initialJob } from "../../../constant/constant";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useNotificationStore } from "../../../hook/store";
 import TablePagination from "@mui/material/TablePagination";
+import { deleteJob } from "../../../api/Job/deleteJob";
 
 export const AdminJobManagement = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(6);
-  const [job, setJob] = useState<JobReqBody>(initialJob);
 
-  const { notifications, addNotification } = useNotificationStore();
+  const { addNotification } = useNotificationStore();
 
-  const queryClient = useQueryClient(); // Initialize queryClient
-
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["jobs", page, limit],
     queryFn: fetchJob,
   });
 
-  const { mutate } = useMutation({
+  const jobApprove = useMutation({
     mutationFn: ({ job, id }: { job: JobReqBody; id: string }) => {
       return updateJobAPI(job, id);
     },
     onSuccess: () => {
-      toast.success("Job approved successfully!");
-      queryClient.invalidateQueries({
-        queryKey: ["jobs", page, limit],
-      }); // Refetch data
+      toast.success("Approve !!!");
+      refetch();
     },
     onError: (error) => {
       toast.error("An error occurred while approving the job.");
+      console.error(error);
+    },
+  });
+
+  const jobDelete = useMutation({
+    mutationFn: ({ id }: { id: string }) => {
+      return deleteJob(id);
+    },
+    onSuccess: () => {
+      toast.success("Job deleted successfully!", { autoClose: 1000 });
+      refetch();
+    },
+    onError: (error) => {
+      toast.error("An error occurred while delete the job.");
       console.error(error);
     },
   });
@@ -60,14 +69,14 @@ export const AdminJobManagement = () => {
       status: JobStatus.ACTIVE,
     };
 
-    mutate({ job: updatedJob, id: row._id as string });
+    jobApprove.mutate({ job: updatedJob, id: row._id as string });
     addNotification(`Your Project${row.name} is approve by admin`, "success");
   };
 
-  useEffect(() => {
-    console.log(data);
-    console.log("notifation", notifications);
-  }, [data]);
+  const handleDeleteJob = (row: JobReqBody) => {
+    jobDelete.mutate({ id: row._id as string });
+    addNotification(`Your Project${row.name} is reject by admin`, "error");
+  };
 
   const getColor = (status: string) => {
     switch (status) {
@@ -76,7 +85,7 @@ export const AdminJobManagement = () => {
       case "ACTIVE":
         return "success";
       default:
-        return "error"; // Fallback color
+        return "error";
     }
   };
 
@@ -86,6 +95,7 @@ export const AdminJobManagement = () => {
 
   return (
     <TableContainer component={Paper} style={{ overflowY: "scroll" }}>
+      <ToastContainer />
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -107,7 +117,7 @@ export const AdminJobManagement = () => {
         <TableBody>
           {data?.data.jobs.map((row) => (
             <TableRow
-              key={row._id} // Use _id as key
+              key={row._id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <StyledTableCell component="th" scope="row">
@@ -131,8 +141,12 @@ export const AdminJobManagement = () => {
                     onClick={() => handleApprove(row)}
                   />
                   <Button text="View" variant="contained" />
-                  <ButtonIcon variant="contained" kind="error">
-                    <DeleteIcon color="error" />
+                  <ButtonIcon
+                    variant="outlined"
+                    color="warning"
+                    onClick={() => handleDeleteJob(row)}
+                  >
+                    <DeleteIcon />
                   </ButtonIcon>
                 </div>
               </StyledTableCell>
@@ -146,6 +160,7 @@ export const AdminJobManagement = () => {
           rowsPerPage={page}
           page={page}
           onPageChange={(event, value) => setPage(value)}
+          className={data?.data.total_page == 1 ? "block" : "hidden"}
         />
       </Table>
     </TableContainer>

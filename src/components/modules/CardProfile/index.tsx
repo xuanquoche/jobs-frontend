@@ -72,8 +72,10 @@ export const CardProfile = ({
     }
   };
 
-  const handleDelete = () => {
-    console.info("You clicked the delete icon.");
+  const handleDelete = (skillToDelete: string) => {
+    setSkillTag((prevSkillTag) =>
+      prevSkillTag.filter((skill) => skill !== skillToDelete)
+    );
   };
 
   useEffect(() => {
@@ -101,6 +103,7 @@ export const CardProfile = ({
             <div className="userName">{fullname}</div>
             <div className="actionEditButton">
               <Button
+                variant="contained"
                 className="buttonEdit"
                 text="Edit"
                 onClick={handleEditButton}
@@ -181,18 +184,33 @@ export const CardProfile = ({
               <div className="skill">
                 <div className="tagAction">
                   {skillTagFirst.map((skill) => (
-                    <div className="chipDetail">
-                      <Chip label={skill} onDelete={handleDelete} />
+                    <div className="chipDetail my-4 ">
+                      <Chip label={skill} />
                     </div>
                   ))}
                   {skillTag &&
                     skillTag.map((_skill, index) => (
                       <div className="chipDetail">
-                        <Chip label={_skill} onDelete={handleDelete} />
+                        <Chip
+                          label={_skill}
+                          onDelete={() => handleDelete(_skill)}
+                        />
                       </div>
                     ))}
                 </div>
-                <Select options={SKILLS} onChange={handleSelectChange} />
+                <div className="selectBtn flex">
+                  <label
+                    className="min-w-20 flex justify-start items-center font-bold mr-1.5"
+                    htmlFor="skill"
+                  >
+                    Skill
+                  </label>
+                  <Select
+                    name="skills"
+                    options={SKILLS}
+                    onChange={handleSelectChange}
+                  />
+                </div>
               </div>
             </div>
 
@@ -206,7 +224,12 @@ export const CardProfile = ({
                       setIsUpdate(false);
                     }}
                   />
-                  <Button type="submit" text="Update" onClick={handleUpdate} />
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    text="Update"
+                    onClick={handleUpdate}
+                  />
                 </div>
               ) : null}
             </div>

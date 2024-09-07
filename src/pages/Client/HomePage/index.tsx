@@ -3,7 +3,7 @@ import Button from "../../../components/common/Button";
 import { Modal } from "../../../components/common/Modal";
 import Input from "../../../components/common/Input";
 import { JobReqBody } from "../../../types/jobs.type";
-import { Levels, JobTypes } from "../../../constant/enum";
+import { Levels } from "../../../constant/enum";
 import Select from "../../../components/common/Select";
 import { SKILLS, LEVELS } from "../../../constant/constant";
 import Date from "../../../components/common/DatePicker";
@@ -17,7 +17,6 @@ import { Grid } from "@mui/material";
 import Card from "../../../components/common/Card";
 import { fetchJob } from "../../../api/fetchJob";
 import Skeleton from "react-loading-skeleton";
-import { JobStatus } from "../../../constant/enum";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { initialJob } from "../../../constant/constant";
@@ -93,7 +92,7 @@ export const HomePageClient = () => {
       setJob(initialJob);
       setSkillTag([]);
       refetch();
-      toast.success("Success Notification !");
+      toast.success("Create Job Success !");
     },
   });
 
@@ -222,7 +221,6 @@ export const HomePageClient = () => {
                   ))}
               </div>
               <div className="selectBtn flex">
-                {" "}
                 <label
                   className="min-w-20 flex justify-start items-center font-bold mr-1.5"
                   htmlFor="skill"
