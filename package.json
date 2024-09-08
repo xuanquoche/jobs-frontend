@@ -28,11 +28,13 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
+    "lodash.debounce": "^4.0.8",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loading-skeleton": "^3.4.0",
     "react-router-dom": "^6.22.1",
+    "react-spinners": "^0.14.1",
     "react-toastify": "^10.0.5",
     "zustand": "^4.5.5"
   },
