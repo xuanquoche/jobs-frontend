@@ -19,9 +19,6 @@ export default function MenuCustom() {
     setAnchorEl(null);
   };
 
-  React.useEffect(() => {
-    console.log("notificaiton", notifications);
-  }, [notifications]);
   return (
     <div>
       <IconButton

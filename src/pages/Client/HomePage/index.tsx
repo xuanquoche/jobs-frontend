@@ -101,16 +101,9 @@ export const HomePageClient = () => {
     queryFn: fetchJob,
   });
 
-  useEffect(() => {
-    console.log(data?.data);
-  }, [data]);
   return (
     <div className="wrapHomePageClient flex flex-col">
       <div className="actionCreate">
-        <div className="navigation">
-          <NavBar />
-        </div>
-
         <Modal isOpen={isOpen} onClose={handleCloseModal}>
           <div className="modalContent">
             <div style={{ margin: "10px 0" }} className="jobName">
@@ -246,7 +239,7 @@ export const HomePageClient = () => {
         </Modal>
         <ToastContainer />
       </div>
-      <div className="createBtn flex justify-end" style={{ margin: "15px" }}>
+      <div className="createBtn flex justify-end " style={{ margin: "15px" }}>
         <Button
           variant="contained"
           text="Create Job"
@@ -262,7 +255,7 @@ export const HomePageClient = () => {
         ) : (
           <Grid container spacing={3}>
             {data?.data.jobs.map((job: JobReqBody, index) => (
-              <Grid item xs={4} style={{ flexGrow: 1 }}>
+              <Grid item xs={4} style={{ flexGrow: 1 }} key={index}>
                 <Card
                   key={index}
                   skills={job.skills}
@@ -271,6 +264,9 @@ export const HomePageClient = () => {
                   description={job.description}
                   salary={job.salary}
                   type={job.type}
+                  _id={job._id}
+                  clientName={job.user?.fullname}
+                  className=" hover:bg-gray-200 cursor-pointer"
                 />
               </Grid>
             ))}

@@ -118,7 +118,6 @@ export default function NavBar() {
   };
 
   useEffect(() => {
-    console.log("show sẻach", data?.data);
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       // Gỡ sự kiện khi component unmounted

@@ -11,8 +11,10 @@ import IconButtonMui from "../ButtonIcon/style";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import Tag from "../Tag";
 import { Chip } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface CardProps {
+  clientName?: string;
   image?: string;
   companyName?: string;
   className?: string;
@@ -25,6 +27,7 @@ interface CardProps {
   endDate?: Date;
   startDate?: Date;
   skills?: string[];
+  _id?: string;
   onClick?: () => void;
 }
 
@@ -43,8 +46,12 @@ const Card: React.FC<CardProps> = memo(
     endDate,
     startDate,
     skills,
+    clientName,
+    _id,
     onClick,
   }) => {
+    const navigate = useNavigate();
+
     const getColor = (type: string) => {
       switch (type) {
         case "PARTTIME":
@@ -56,16 +63,24 @@ const Card: React.FC<CardProps> = memo(
       }
     };
 
+    const moveToDetailPage = (id: string) => {
+      navigate(`/client/job-detail/${id}`);
+    };
+
     return (
       <CardMui className={`card ${className}`}>
         <CardHeaderCustom
           avatar={<AvatarCustom sx={{ width: 56, height: 56 }}>R</AvatarCustom>}
           action={
-            <IconButtonMui color="primary" className="iconButtonDetail">
+            <IconButtonMui
+              color="primary"
+              className="iconButtonDetail"
+              onClick={() => moveToDetailPage(_id as string)}
+            >
               <ArrowOutwardIcon />
             </IconButtonMui>
           }
-          title={"Helo"}
+          title={clientName}
         />
         <CardContentCustom>
           <div className="jobName">

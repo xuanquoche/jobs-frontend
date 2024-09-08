@@ -8,11 +8,9 @@ export const deleteJob = async (id: string) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${access_token}`,
     };
-    console.log("delete", id);
     const response = await http.delete(`/jobs/${id}`, {
       headers,
     });
-    console.log("response delete", response);
     return response.data;
   } catch (error: any) {
     throw error;

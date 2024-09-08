@@ -8,6 +8,7 @@ import theme from "./assets/themes/colors";
 import { DefaultSidebar } from "./components/modules/DefaultLayout/DefaultSidebar";
 import setupAxiosInterceptors from "./utils/setupAxiosInterceptors";
 import { useCheckAuthentication } from "./hook/useCheckAuthentication";
+import NavBar from "./components/modules/Navbar";
 
 setupAxiosInterceptors();
 
@@ -35,6 +36,7 @@ function App() {
                 element={
                   checkIslogin ? (
                     <Layout>
+                      {route.isShowNavbar === false ? null : <NavBar />}
                       <route.component />
                     </Layout>
                   ) : (
