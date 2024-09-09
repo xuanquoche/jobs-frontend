@@ -20,7 +20,7 @@ import Skeleton from "react-loading-skeleton";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { initialJob } from "../../../constant/constant";
-import NavBar from "../../../components/modules/Navbar";
+import { useCheckRole } from "../../../hook/useCheckRole";
 
 export const HomePageClient = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -28,6 +28,8 @@ export const HomePageClient = () => {
   const [skillTag, setSkillTag] = useState<string[]>([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(6);
+
+  const { role } = useCheckRole();
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -100,6 +102,10 @@ export const HomePageClient = () => {
     queryKey: ["jobs", page, limit],
     queryFn: fetchJob,
   });
+
+  useEffect(() => {
+    console.log("role data", role);
+  }, [role]);
 
   return (
     <div className="wrapHomePageClient flex flex-col">

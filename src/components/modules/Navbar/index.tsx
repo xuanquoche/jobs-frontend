@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -19,50 +17,15 @@ import { useQuery } from "@tanstack/react-query";
 import { JobReqBody } from "../../../types/jobs.type";
 import ClipLoader from "react-spinners/ClipLoader";
 import Avatar from "@mui/material/Avatar";
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
+import { SearchIconWrapper, StyledInputBase, Search } from "./style";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
+
+  const navigate = useNavigate();
   // search debounce
   const searchBoxRef = useRef<HTMLDivElement>(null);
   const [keyword, setKeyword] = useState<string>("");
@@ -143,7 +106,9 @@ export default function NavBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={() => navigate("/creator/profile")}>
+        My account
+      </MenuItem>
     </Menu>
   );
 
@@ -249,12 +214,12 @@ export default function NavBar() {
           </ul>
         </div>
       ) : (
-        <Box
-          sx={{
+        <div
+          style={{
             position: "fixed",
             top: "52px",
             left: "20%",
-            backgroundColor: "#ffffff",
+            backgroundColor: "transparent",
             width: "30%",
             boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px;",
             borderRadius: "5px",
@@ -267,7 +232,7 @@ export default function NavBar() {
             aria-label="Loading Spinner"
             data-testid="loader"
           />
-        </Box>
+        </div>
       )}
     </div>
   );

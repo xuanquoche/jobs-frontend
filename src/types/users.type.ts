@@ -4,7 +4,9 @@ export interface User {
   password: string;
   avatar?: string;
   confirmPassword?: string;
-  role: number;
+  role: {
+    name: string;
+  };
 }
 
 export interface UserLoginform {

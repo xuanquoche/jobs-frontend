@@ -18,6 +18,10 @@ export function useCheckAuthentication() {
   useEffect(() => {
     checkAuth();
     window.addEventListener("storage", checkAuth);
+
+    return () => {
+      window.removeEventListener("storage", checkAuth);
+    };
   }, []);
 
   if (isAuthenticated === null) return null; // Waiting for auth check

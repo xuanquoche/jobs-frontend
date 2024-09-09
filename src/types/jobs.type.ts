@@ -18,6 +18,9 @@ export interface JobReqBody {
     fullname?: string;
     id?: string;
   };
+  role?: {
+    name: string;
+  };
 }
 
 export { JobStatus, JobTypes, Levels };

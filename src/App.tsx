@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./App.css";
-import { privateRoutes, publicRoutes } from "./routes";
+import { useRoutes } from "./routes";
 import { ThemeProvider } from "@mui/material";
 import theme from "./assets/themes/colors";
 import { DefaultSidebar } from "./components/modules/DefaultLayout/DefaultSidebar";
@@ -14,6 +14,8 @@ setupAxiosInterceptors();
 
 function App() {
   const checkIslogin = useCheckAuthentication();
+
+  const { publicRoutes, privateRoutes } = useRoutes();
 
   return (
     <ThemeProvider theme={theme}>
