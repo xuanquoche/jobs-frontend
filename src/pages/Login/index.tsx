@@ -11,6 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import { validateFormLogin } from "../../utils/AuthenValidate";
 import { loginUser } from "../../api/loginApi";
 import { setTokens } from "../../utils/tokenStorage";
+import { useCheckRole } from "../../hook/useCheckRole";
 
 const initialUser: UserLoginform = {
   email: "",
@@ -47,9 +48,15 @@ const Login = () => {
         data.data?.access_token as string,
         data.data?.refresh_token as string
       );
+      if (data.data?.role.name === "ADMIN") {
+        navigate("/admin/home");
+      } else if (data.data?.role.name === "CREATOR") {
+        navigate("/creator/home");
+      } else {
+        navigate("/client/home");
+      }
       // axios.defaults.headers.common["Authorization"] =
       //   `Bearer ${data.data?.access_token}`;
-      navigate("/home");
       window.dispatchEvent(new Event("storage"));
     },
   });

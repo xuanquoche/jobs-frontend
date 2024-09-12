@@ -15,6 +15,11 @@ export interface UserLoginform {
   data?: {
     access_token: string;
     refresh_token: string;
+    role: {
+      name: string;
+      _id: string;
+      description: string;
+    };
   };
 }
 export interface FormErrors {

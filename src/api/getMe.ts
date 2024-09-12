@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useCheckAuthentication } from "../hook/useCheckAuthentication";
 import { User } from "../types/users.type";
 import http from "../utils/http";
 import { getAccessToken } from "../utils/tokenStorage";
@@ -10,15 +8,7 @@ interface ResponseGetMe {
 }
 
 export const getMe = async () => {
-  //   const checkIsLogin = useCheckAuthentication();
-  //   useEffect(() => {
-  //     console.log("check is login", checkIsLogin);
-  //   }, [checkIsLogin]);
   try {
-    // if (checkIsLogin) {
-
-    // }
-
     const access_token = getAccessToken();
     const headers = {
       "Content-Type": "application/json",

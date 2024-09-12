@@ -1,34 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope */
-import Card from "../../../components/common/Card";
-import { Header } from "../../../components/modules/Header";
-import Grid from "@mui/material/Grid";
+import CardJob from "../../../components/modules/JobCard";
 
 export function HomePage() {
   return (
     <div className="containerParent">
-      <Header />
       <div
         className="body-page flex justify-evenly flex-col"
         style={{ maxWidth: "90%", margin: "0 auto" }}
       >
         <div className="jobList">
-          <Grid container spacing={3}>
-            <Grid item xs={4}>
-              <Card status="helo" />
-            </Grid>
-            <Grid item xs={4}>
-              <Card />
-            </Grid>
-            <Grid item xs={4}>
-              <Card />
-            </Grid>
-            <Grid item xs={4}>
-              <Card />
-            </Grid>
-            <Grid item xs={4}>
-              <Card />
-            </Grid>
-          </Grid>
+          <CardJob />
         </div>
         <div className="slogan" style={{ margin: "100px auto" }}>
           <div

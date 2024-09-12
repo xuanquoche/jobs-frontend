@@ -59,7 +59,7 @@ export const useRoutes = () => {
       if (role === "ADMIN") {
         const adminRoutes = [
           {
-            path: "/admin/",
+            path: "/admin/home",
             component: AdminJobManagement,
             isShowSidebar: true,
             isShowNavbar: false,
@@ -97,7 +97,7 @@ export const useRoutes = () => {
       if (role === "CLIENT") {
         const clientRoutes = [
           {
-            path: "/client",
+            path: "/client/home",
             component: HomePageClient,
             isShowSidebar: true,
             isShowNavbar: true,
