@@ -9,7 +9,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined";
-import NewReleasesOutlinedIcon from "@mui/icons-material/NewReleasesOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import { SidebarWrapper, SidebarText } from "./style";
 import logo from "../../../assets/icon/Logo.png";
@@ -17,9 +17,12 @@ import logo from "../../../assets/icon/Logo.png";
 import { useNavigate } from "react-router-dom";
 //Type
 import { SidebarType } from "../../../types/sidebar.type";
+import useLogout from "../../../hook/useLogout";
 
 export default function SidebarHome() {
   const navigate = useNavigate();
+
+  const { logout } = useLogout();
 
   type SidebarItemType = SidebarType[];
   const sidebarList: SidebarItemType = [
@@ -53,8 +56,9 @@ export default function SidebarHome() {
     },
     {
       id: 6,
-      name: "Promote",
-      icon: <NewReleasesOutlinedIcon />,
+      name: "Log Out",
+      path: "/logout",
+      icon: <LogoutIcon />,
     },
   ];
 
@@ -68,6 +72,9 @@ export default function SidebarHome() {
         break;
       case "/shop":
         navigate("/shop");
+        break;
+      case "/logout":
+        logout();
         break;
       default:
         console.log("not for routes");

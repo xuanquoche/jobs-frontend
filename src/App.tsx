@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Fragment, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./App.css";
 import { useRoutes } from "./routes";
@@ -15,7 +15,15 @@ setupAxiosInterceptors();
 function App() {
   const checkIslogin = useCheckAuthentication();
 
+  const navigate = useNavigate();
+
   const { publicRoutes, privateRoutes } = useRoutes();
+
+  useEffect(() => {
+    if (checkIslogin == false) {
+      navigate("/");
+    }
+  }, [checkIslogin, navigate]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -41,9 +49,7 @@ function App() {
                       {route.isShowNavbar === false ? null : <NavBar />}
                       <route.component />
                     </Layout>
-                  ) : (
-                    <Navigate to={"/"} />
-                  )
+                  ) : null
                 }
               />
             );

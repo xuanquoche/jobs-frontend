@@ -19,11 +19,14 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Avatar from "@mui/material/Avatar";
 import { SearchIconWrapper, StyledInputBase, Search } from "./style";
 import { useNavigate } from "react-router-dom";
+import useLogout from "../../../hook/useLogout";
 
 export default function NavBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
+
+  const { logout } = useLogout();
 
   const navigate = useNavigate();
   // search debounce
@@ -105,10 +108,10 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={() => navigate("/creator/profile")}>
         My account
       </MenuItem>
+      <MenuItem onClick={logout}>Sign out</MenuItem>
     </Menu>
   );
 
